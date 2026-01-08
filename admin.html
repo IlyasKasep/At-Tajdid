@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin - RA At-Tajdied</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+    <style>
+        /* CSS Tambahan Khusus Halaman Admin */
+        body { background-color: #f0f2f5; }
+        .admin-container { max-width: 1000px; margin: 30px auto; padding: 20px; }
+        .admin-card { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            margin-bottom: 30px;
+        }
+        .admin-card h2 { border-bottom: 2px solid var(--brown-accent); padding-bottom: 10px; margin-bottom: 20px; color: var(--brown-accent); }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; font-size: 14px; }
+        th { background-color: var(--brown-accent); color: white; }
+        
+        .btn-delete { background: #ff5252; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; }
+        .btn-delete:hover { background: #d32f2f; }
+        
+        .form-group-admin { margin-bottom: 15px; }
+        .form-group-admin label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group-admin input, .form-group-admin textarea { 
+            width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; 
+        }
+        
+        .news-item-admin { display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #eee; padding: 10px 0; }
+        .news-item-admin img { width: 80px; height: 60px; object-fit: cover; border-radius: 5px; }
+        .badge-wa { background: #25d366; color: white; padding: 3px 8px; border-radius: 5px; text-decoration: none; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+          <div class="logo">
+            <img src="photo/Persis.png" alt="Logo RA At-Tajdied"> 
+            <h1>PANEL ADMIN</h1>
+          </div>
+      
+          <!-- HAMBURGER -->
+          <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+      
+          <!-- NAV -->
+          <nav id="nav-menu">
+            <ul>
+              <li><a href="index.html">LIHAT WEBSITE</a></li>
+              <li><a href="#" onclick="logoutAdmin()" style="color:red;">LOGOUT</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>      
+
+    <div class="admin-container">
+        
+        <div class="admin-card">
+            <h2>+ Tambah Berita / Kegiatan</h2>
+            <form id="formBerita">
+                <div class="form-group-admin">
+                    <label>Judul Kegiatan</label>
+                    <input type="text" id="judulBerita" placeholder="Contoh: Kunjungan ke Pemadam Kebakaran" required>
+                </div>
+                <div class="form-group-admin">
+                    <label>Link Foto (Direct Link dari PostImages/Imgur)</label>
+                    <input type="text" id="linkFoto" placeholder="https://i.postimg.cc/xyz/gambar.jpg" required>
+                </div>
+                <div class="form-group-admin">
+                    <label>Deskripsi Singkat</label>
+                    <textarea id="deskripsiBerita" rows="3" placeholder="Ceritakan singkat kegiatan ini..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">PUBLIKASIKAN BERITA</button>
+            </form>
+        </div>
+
+        <div class="admin-card">
+            <h2>Kelola Galeri & Berita</h2>
+            <div id="listBeritaAdmin">
+                <p>Memuat berita...</p>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <h2>Daftar Calon Siswa Baru</h2>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nama Anak</th>
+                            <th>Nama Orang Tua</th>
+                            <th>Kontak</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listPendaftarAdmin">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">LIHAT WEBSITE</a></li>
+            <li><a href="#" onclick="logoutAdmin()" style="color: red;">LOGOUT</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        // CONFIG FIREBASE
+        const firebaseConfig = { 
+            apiKey: "AIzaSyA7S04R-66Tuu1aXF1KS_VLmAaYtMZwNsg",
+            authDomain: "at-tajdied-639c8.firebaseapp.com",
+            projectId: "at-tajdied-639c8",
+            storageBucket: "at-tajdied-639c8.firebasestorage.app",
+            messagingSenderId: "937617405954",
+            appId: "1:937617405954:web:807d815f27ba888e688f1b"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // --- FUNGSI BERITA ---
+
+        // 1. Simpan Berita Baru
+        document.getElementById('formBerita').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            btn.innerText = "Mengirim...";
+            btn.disabled = true;
+
+            try {
+                await db.collection('berita').add({
+                    judul: document.getElementById('judulBerita').value,
+                    fotoUrl: document.getElementById('linkFoto').value,
+                    deskripsi: document.getElementById('deskripsiBerita').value,
+                    tanggal: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                alert("Berita Berhasil Ditambahkan!");
+                e.target.reset();
+                loadBerita(); // Refresh list
+            } catch (err) {
+                alert("Gagal: " + err.message);
+            } finally {
+                btn.innerText = "PUBLIKASIKAN BERITA";
+                btn.disabled = false;
+            }
+        });
+
+        // 2. Load Daftar Berita
+        async function loadBerita() {
+            const container = document.getElementById('listBeritaAdmin');
+            const snapshot = await db.collection('berita').orderBy('tanggal', 'desc').get();
+            container.innerHTML = '';
+            
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                container.innerHTML += `
+                    <div class="news-item-admin">
+                        <img src="${data.fotoUrl}" alt="foto">
+                        <div style="flex-grow: 1;">
+                            <strong>${data.judul}</strong>
+                        </div>
+                        <button class="btn-delete" onclick="hapusBerita('${doc.id}')">Hapus</button>
+                    </div>
+                `;
+            });
+        }
+
+        async function hapusBerita(id) {
+            if(confirm("Hapus berita ini dari website?")) {
+                await db.collection('berita').doc(id).delete();
+                loadBerita();
+            }
+        }
+
+        // --- FUNGSI PENDAFTARAN ---
+
+        async function loadPendaftaran() {
+            const tbody = document.getElementById('listPendaftarAdmin');
+            const snapshot = await db.collection('pendaftaran').orderBy('waktuDaftar', 'desc').get();
+            tbody.innerHTML = '';
+
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${data.namaAnak}</td>
+                        <td>${data.namaWali}</td>
+                        <td>
+                            <a href="https://wa.me/${data.noWA}" target="_blank" class="badge-wa">WhatsApp</a>
+                        </td>
+                        <td>
+                            <button class="btn-delete" onclick="hapusPendaftaran('${doc.id}')">X</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        async function hapusPendaftaran(id) {
+            if(confirm("Hapus data pendaftar ini?")) {
+                await db.collection('pendaftaran').doc(id).delete();
+                loadPendaftaran();
+            }
+        }
+
+        // Jalankan saat halaman dibuka
+        window.onload = () => {
+            loadBerita();
+            loadPendaftaran();
+        };
+    </script>
+    <script src="navbar.js"></script>
+</body>
+</html>

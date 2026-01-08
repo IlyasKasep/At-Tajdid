@@ -1,0 +1,346 @@
+/* =========================
+   ROOT & RESET
+========================= */
+:root {
+    --pastel-yellow: #f9f9d7;
+    --dark-text: #333;
+    --brown-accent: #8d6e63;
+    --soft-gray: #e0e0e0;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* =========================
+     BASE STYLE
+  ========================= */
+  body {
+    background-color: var(--pastel-yellow);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--dark-text);
+    line-height: 1.6;
+  }
+  
+  .container {
+    width: 85%;
+    margin: auto;
+  }
+  
+  /* =========================
+     NAVBAR
+  ========================= */
+  .navbar {
+    padding: 20px 0;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  nav.active {
+    right: 0; /* Muncul ke layar */
+  }
+
+  nav ul {
+    display: flex;
+  gap: 25px;
+  list-style: none;
+  }
+  
+  nav ul li {
+    margin-left: 20px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: var(--dark-text);
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  
+  nav ul li a.active {
+    border-bottom: 2px solid var(--brown-accent);
+  }
+  
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    height: 40px;
+  }
+  
+  .logo h1 {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    margin-left: 10px;
+  }
+  
+  /* =========================
+     HERO SECTION
+  ========================= */
+  .hero {
+    margin-top: 30px;
+  }
+  
+  .hero-image {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .hero-text-overlay {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  }
+  
+  .hero-text-overlay h2 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  .hero-desc {
+    padding: 30px 0;
+  }
+  
+  .btn-primary {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 25px;
+    background: var(--brown-accent);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+  }
+  
+  /* =========================
+     SECTION & GRID
+  ========================= */
+  .section-padding {
+    padding: 60px 0;
+  }
+  
+  .profile-grid,
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    align-items: center;
+    margin-top: 40px;
+  }
+  
+  .profile-grid img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    justify-self: center;
+  }
+  
+  .info-box {
+    background: var(--soft-gray);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  /* =========================
+     FORM
+  ========================= */
+  .form-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .form-header h2 {
+    display: inline-block;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--dark-text);
+  }
+  
+  .registration-form {
+    background: #fff;
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .btn-submit {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--brown-accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .btn-submit:hover {
+    background-color: #6d4c41;
+  }
+  
+  /* =========================
+     GALERI
+  ========================= */
+  #galeriFoto {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+  }
+  
+  .galeri-item {
+    background: #fff;
+    padding: 15px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .galeri-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  /* =========================
+     MAP
+  ========================= */
+  .map-area {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .map-area iframe {
+    width: 100%;
+    height: 400px;
+    border: 0;
+  }
+  
+  /* =========================
+     FOOTER
+  ========================= */
+  .footer {
+    padding: 30px;
+    text-align: center;
+    font-size: 0.8rem;
+    border-top: 1px solid #ccc;
+  }
+  
+  /* =========================
+     RESPONSIVE
+  ========================= */
+  /* Smooth Scroll Global */
+html {
+  scroll-behavior: smooth;
+}
+
+/* =========================
+   HAMBURGER
+========================= */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hamburger span {
+  width: 28px;
+  height: 3px;
+  background: var(--brown-accent);
+  transition: 0.3s;
+}
+
+/* =========================
+   MOBILE NAVBAR
+========================= */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+    z-index: 1001;
+  }
+
+  nav {
+    position: absolute;
+    top: 100%;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    transition: right 0.4s ease;
+    padding-top: 40px;
+    z-index: 1000;
+  }
+
+  nav.active {
+    right: 0;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* Animasi Hamburger */
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+  

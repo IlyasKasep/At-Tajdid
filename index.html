@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RA At-Tajdied - Menumbuhkan Akhlak Mulia</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
+</head>
+
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">
+        <img src="photo/Persis.png" alt="Logo RA At-Tajdied" />
+        <h1>AT-TAJDIED</h1>
+      </div>
+    
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    
+      <nav id="nav-menu">
+        <ul>
+          <li><a href="#home">HOME</a></li>
+          <li><a href="#profil">TENTANG</a></li>
+          <li><a href="#galeri">KEGIATAN</a></li>
+          <li><a href="#kontak">KONTAK</a></li>
+          <li><a href="pendaftaran.html" class="btn-daftar">PENDAFTARAN</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero">
+      <div class="hero-image">
+        <img src="photo/hero.jpg" alt="Kegiatan RA At-Tajdied" />
+
+        <div class="hero-text-overlay">
+          <h2>
+            Menumbuhkan Akhlak <br />
+            Mulia Sejak Dini
+          </h2>
+        </div>
+      </div>
+
+      <div class="hero-desc container">
+        <p>
+          RA At-Tajdied adalah ruang belajar yang menyenangkan bagi anak-anak
+          untuk tumbuh, bermain, dan belajar dengan penuh cinta.
+          <br />
+          Kami berkomitmen mendampingi setiap langkah kecil anak dalam
+          menanamkan akhlak mulia, nilai keislaman, kemandirian, serta
+          kecerdasan sejak usia dini.
+        </p>
+
+        <a href="pendaftaran.html" class="btn-primary">
+          DAFTAR SEKARANG
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== PROFIL ===== -->
+    <section id="profil" class="section-padding container">
+      <div class="profile-grid">
+        <img src="photo/Momi.jpg" alt="Kepala Sekolah" />
+
+        <div class="profile-content">
+          <span class="subtitle" style="color: #8B4513; font-weight: bold;">
+            KEPALA SEKOLAH
+          </span>
+
+          <h2 style="font-size: 2.5rem; margin: 10px 0;">
+            Ela Helasni
+          </h2>
+
+          <div id="profilContent">
+            <p>
+              <b>
+                Lingkungan yang aman, guru yang sabar dan profesional,
+                serta metode belajar sambil bermain menjadikan RA At-Tajdied
+                menghadirkan pengalaman belajar yang ceria dan bermakna.
+                Setiap anak diajak mengenal Allah, belajar berperilaku baik,
+                serta mengembangkan potensi diri sesuai tahap perkembangannya.
+              </b>
+            </p>
+
+            <p>
+              Melalui kegiatan yang kreatif, islami, dan menyenangkan,
+              kami percaya bahwa pendidikan usia dini adalah fondasi penting
+              untuk membentuk generasi yang beriman, berilmu, dan berakhlak baik.
+              RA At-Tajdied bukan sekadar tempat belajar, tetapi rumah kedua
+              bagi anak-anak untuk tumbuh dengan bahagia dan penuh kasih sayang.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GALERI ===== -->
+    <section id="galeri" class="section-padding container">
+      <h2 class="section-title">Kegiatan Terbaru</h2>
+
+      <div id="galeriFoto" class="galeri-grid">
+        <!-- Foto dari Firebase -->
+      </div>
+    </section>
+
+    <!-- ===== KONTAK ===== -->
+    <section id="kontak" class="section-padding container">
+      <div class="contact-grid">
+
+        <div class="contact-info">
+          <h2>Kontak</h2>
+
+          <p>
+            Hubungi RA At-Tajdied melalui kontak di samping.
+            Kami siap melayani dengan ramah dan penuh perhatian.
+          </p>
+
+          <div class="info-box">
+            <strong>KONTAK</strong>
+            <a href="https://wa.me/6288218569130">0882-1856-9130</a>
+          </div>
+
+          <div class="info-box">
+            <strong>E-MAIL</strong>
+            <a href="mailto:attajdied@gmail.com">attajdied@gmail.com</a>
+          </div>
+
+          <div class="info-box">
+            <strong>INSTAGRAM</strong> @RA_At_tajdied
+          </div>
+        </div>
+
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d989.8113810896668!2d107.47143824586743!3d-7.097515704913954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68f39060528ca9%3A0xb259de1e532bb27!2sMasjid%20At-Tajdied!5e0!3m2!1sid!2sid!4v1766381500961!5m2!1sid!2sid"
+          width="100%"
+          height="350"
+          style="border: 0; border-radius: 15px;"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <p>© 2025 RA At-Tajdied. All Rights Reserved.</p>
+
+    <a href="login.html" style="font-size: 10px; color: #ccc; text-decoration: none;">
+      Admin Login
+    </a>
+  </footer>
+
+  <!-- ===== FIREBASE CONFIG ===== -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA7S04R-66Tuu1aXF1KS_VLmAaYtMZwNsg",
+      authDomain: "at-tajdied-639c8.firebaseapp.com",
+      projectId: "at-tajdied-639c8",
+      storageBucket: "at-tajdied-639c8.firebasestorage.app",
+      messagingSenderId: "937617405954",
+      appId: "1:937617405954:web:807d815f27ba888e688f1b",
+      measurementId: "G-BDJ542B0KQ"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

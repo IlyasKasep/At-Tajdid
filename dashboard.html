@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Orang Tua</title>
+    <link rel="stylesheet" href="style.css"> 
+    
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+</head>
+<body onload="checkAuthStatus()">
+    <header style="background-color: #4CAF50; color: white; padding: 15px; overflow: hidden;">
+        <h2 id="welcomeMessage" style="display: inline-block;">Memuat...</h2>
+        <button onclick="handleLogout()" style="float: right; padding: 10px;">Logout</button>
+    </header>
+
+    <main style="padding: 20px;">
+        <section class="card" style="margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
+            <h3>Informasi Siswa</h3>
+            <div id="studentDetails">Memuat detail...</div>
+        </section>
+
+        <section class="card" style="margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
+            <h2 style="color: #4CAF50; border-bottom: 2px solid #4CAF50;">Laporan Perkembangan</h2>
+            <div id="studentProgress">Memuat laporan...</div>
+        </section>
+
+        <section class="card" style="padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
+            <h2 style="color: #4CAF50; border-bottom: 2px solid #4CAF50;">Rincian Pembayaran</h2>
+            <div id="billingDetails">Memuat data biaya...</div>
+        </section>
+    </main>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyA7S04R-66Tuu1aXF1KS_VLmAaYtMZwNsg",
+            authDomain: "at-tajdied-639c8.firebaseapp.com",
+            projectId: "at-tajdied-639c8",
+            storageBucket: "at-tajdied-639c8.firebasestorage.app",
+            messagingSenderId: "937617405954",
+            appId: "1:937617405954:web:807d815f27ba888e688f1b",
+            measurementId: "G-BDJ542B0KQ"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+    </script>
+    
+    <script src="script.js"></script>
+</body>
+</html>
